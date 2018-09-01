@@ -1,5 +1,5 @@
 import express from 'express'
-import pokemon from 'pokemongo-json-pokedex/output/pokemon.json'
+import pokemans from 'pokemongo-json-pokedex/output/pokemon.json'
 
 const port = 3000
 const app = express();
@@ -9,7 +9,17 @@ app.get("/", (req, res) => {
 })
 
 app.get("/pokemon", (req, res) => {
-    res.send(pokemon)
+    res.send(pokemans)
 })
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.get("/pokemon/name/:name", (req, res) => {
+    const name = req.params.name.toLowerCase();
+    res.send(pokemans.filter(pokemon => pokemon.name.toLowerCase().includes(name)))
+})
+
+app.get("/pokemon/dex/:dex", (req, res) => {
+    const dex = req.params.dex.toLowerCase();
+    res.send(pokemans.filter(pokemon => pokemon.dex == dex))
+})
+
+app.listen(port, () => console.log(`Pokedex started on port ${port}`));
