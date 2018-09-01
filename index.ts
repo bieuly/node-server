@@ -1,5 +1,5 @@
 import express from 'express'
-import pokemans from 'pokemongo-json-pokedex/output/pokemon.json'
+import pokemans from './pokemonProvider/pokemon'
 
 const port = 3000
 const app = express();
